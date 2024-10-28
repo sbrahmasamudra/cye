@@ -1,6 +1,6 @@
 # cye
 
-# Llama 7B Model Fine-Tuning with Hugging Face
+# Llama 7B Model Fine-Tuning with Hugging Face on Foundry Cloud Platform
 
 This project demonstrates how to fine-tune the Llama 7B model using Hugging Face’s `transformers` library. The code loads a simple dataset, tokenizes it, and trains the model using the `Trainer` API with mixed precision and gradient accumulation for efficient training.
 
