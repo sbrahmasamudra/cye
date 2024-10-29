@@ -55,13 +55,82 @@ df.drop(columns=['Question','Answer'], axis=1, inplace=True)
 
 1. Using bitsandbytes library for memory management to load the pre-trained model of 7B.
 
-2. LORA config - Finetuning specific params to keep the costs low.
+   ```
+    bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_use_double_quant=False,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=compute_dtype
+)
+   ```
 
-3. Setting up the trainign arguments to save create epoch based checkpoints, learning rate, and also tell the model where to output the finetuned model.
+2. Tokenizer to convert the loaded data. THis step will tokenize the sentences to words to ids and load the pre-trained model. 
 
-4. Setting up the trainer with the finetuned model and the data set. Here you can have training dataset, evaluation dataset, and validations dataset based on your requirements.
+```
+tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+tokenizer.pad_token = tokenizer.eos_token
+tokenizer.padding_side = "right"
+```
+```
+model = AutoModelForCausalLM.from_pretrained(model_id,quantization_config=bnb_config,device_map="auto")
+```
+
+3. LORA config - Finetuning specific params to keep the costs low.
+
+```
+peft_config = LoraConfig(
+                          lora_alpha=16,
+                          lora_dropout=0.1,
+                          r=64,
+                          bias="none",
+                          task_type="CAUSAL_LM"
+                        )
+```
+
+4. Setting up the training arguments to save create epoch based checkpoints, learning rate, and also tell the model where to output the finetuned model.
+
+```
+args = TrainingArguments(
+    output_dir='llama2-7b-tuned-qna',
+    num_train_epochs=10, # adjust based on the data size
+    per_device_train_batch_size=2, # use 4 if you have more GPU RAM
+    save_strategy="epoch", #steps
+    # evaluation_strategy="epoch",
+    learning_rate=2e-4,
+    fp16=True,
+    seed=42
+)
+
+```
+
+5. Setting up the trainer with the finetuned model and the data set. Here you can have training dataset, evaluation dataset, and validations dataset based on your requirements.
+
+```
+trainer = SFTTrainer(
+    model=model,
+    train_dataset=train,
+    # eval_dataset=test,
+    dataset_text_field='text',
+    peft_config=peft_config,
+    max_seq_length=1042,
+    tokenizer=tokenizer,
+    args=args,
+    packing=True,
+)
+trainer.train()
+trainer.save_model()
+
+```
    
-5. Save the model and merge the model to be used for your applicaitons or upload it to Huggingface for consumption. 
+6. Save the model and merge the model to be used for your applicaitons or upload it to Huggingface for consumption.
 
+```
+merged_model = new_model.merge_and_unload()
+
+#17: Save the merged model
+merged_model.save_pretrained("metallama2-7b-qa-tuned-merged", safe_serialization=True)
+tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
+
+```
 
 ## Testing and Troubleshooting
