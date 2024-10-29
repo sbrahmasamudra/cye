@@ -28,8 +28,7 @@ This project fine-tunes the Llama 7B model (`meta-llama/Llama-2-7b-hf`) using a 
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/llama-finetune.git
-    cd llama-finetune
+    git clone https://github.com/sbrahmasamudra/cye.git
     ```
 
 2. Install the required Python packages:
