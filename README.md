@@ -143,15 +143,24 @@ tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
     ```
     
 3. Follow this command and make sure a port like 8080 is open - https://docs.mlfoundry.com/foundry-documentation/compute-instances/managing-open-ports
-4. Use the below commands to ensure an output like below exists that confirms the port is active and running and can accept external HTTP requests.
+4. Server :
+    ```
+        #app.py
+        This script acts as a server and waits for /predict requests from clients and users
+    ```
+5. genResponse:
+
+   ```
+    #genResponse().py
+    This script returns the response by knowing where the fine-tuned model is, loading the model, and running the tokenizer on the 'prompt'. This is the resposne that is returned to app.py.
+   ```
+
+7. Use the below commands to ensure an output like below exists that confirms the port is active and running and can accept external HTTP requests.
 
    ```
    ubuntu@unwilling-jaguar-1:/etc/systemd/system$ ss -tuln | grep 8080
    tcp   LISTEN 0      2048               0.0.0.0:8080       0.0.0.0:*      
    ```
-
-   FOUNDRY SERVICE
-    
    ```
     ubuntu@unwilling-jaguar-1:/etc/systemd/system$ cat examplefoundry.service 
 
@@ -172,11 +181,6 @@ tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
     
    ```
     curl -X POST "http://<PUBLIC_IP_ADDRESS_OF_YOUR_VM>:8080/predict" -H "Content-Type: application/json" -d '{"prompt": "What is your purpose?"}'
-   
+     OUTPUT: {"response":"What is your purpose? Are you a business? Are you a brand? Or are you a person?"}  
    ```
-
-    ```
-    ```
-    OUTPUT: {"response":"What is your purpose? Are you a business? Are you a brand? Or are you a person?"}
    
-    ```
