@@ -133,8 +133,15 @@ tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
 1. The end of training the model and merged will create metallama2-7b-qa-tuned-merged as a directory with several files. It will include the tokenizer.json, the model safetencors (3 parts).
 2. To test if the Prompt is geenrating text, create another Python Service with an API end-point using Flask or Fast API. The below is to test if the /predict end-point is working in the local machine which is your VM you have provisioned leveraging Foundry's Spot/Compute instance.
 
-   ```  curl -X POST "http://127.0.0.1:8080/predict" -H "Content-Type: application/json" -d '{"prompt": "What is your purpose?"}
+   ```
+   In your Terminal or POSTMAN:
+   
+   curl -X POST "http://127.0.0.1:8080/predict" -H "Content-Type: application/json" -d '{"prompt": "What is your purpose?"}
+   ```
     ```
+    OUTPUT: {"response":"What is your purpose? Are you a business? Are you a brand? Or are you a person?"}
+    ```
+    
 3. Follow this command and make sure a port like 8080 is open - https://docs.mlfoundry.com/foundry-documentation/compute-instances/managing-open-ports
 4. Use the below commands to ensure an output like below exists that confirms the port is active and running and can accept external HTTP requests.
 
@@ -165,4 +172,11 @@ tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
     
    ```
     curl -X POST "http://<PUBLIC_IP_ADDRESS_OF_YOUR_VM>:8080/predict" -H "Content-Type: application/json" -d '{"prompt": "What is your purpose?"}'
+   
    ```
+
+    ```
+    ```
+    OUTPUT: {"response":"What is your purpose? Are you a business? Are you a brand? Or are you a person?"}
+   
+    ```
