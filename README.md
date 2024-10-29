@@ -42,7 +42,7 @@ This project fine-tunes the Llama 7B model (`meta-llama/Llama-2-7b-hf`) using a 
     ```
 
 ## Data Preparation
-The script uses a small, custom dataset for demonstration. The dataset contains simple question and answer text pairs:
+The csv (QNA_DATA.CSV) uses a small, custom dataset for demonstration. The dataset contains simple question and answer text pairs. Keep the file in the same directory as your Py scripts that trains the model. 
 
 ```
 #1: Read the file
