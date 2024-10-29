@@ -70,9 +70,8 @@ df.drop(columns=['Question','Answer'], axis=1, inplace=True)
 tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
 tokenizer.pad_token = tokenizer.eos_token
 tokenizer.padding_side = "right"
-```
-```
 model = AutoModelForCausalLM.from_pretrained(model_id,quantization_config=bnb_config,device_map="auto")
+
 ```
 
 3. LORA config - Finetuning specific params to keep the costs low.
