@@ -183,4 +183,15 @@ tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
     curl -X POST "http://<PUBLIC_IP_ADDRESS_OF_YOUR_VM>:8080/predict" -H "Content-Type: application/json" -d '{"prompt": "What is your purpose?"}'
      OUTPUT: {"response":"What is your purpose? Are you a business? Are you a brand? Or are you a person?"}  
    ```
-   
+
+8. Check logs in app.py whenever you make an HTTP request
+
+```
+ubuntu@unwilling-jaguar-1:~/foundry$ python3 app.py 
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:02<00:00,  1.18it/s]
+INFO:     Started server process [3543]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:     127.0.0.1:33854 - "POST /predict HTTP/1.1" 200 OK
+```
