@@ -54,4 +54,15 @@ df.drop(columns=['Question','Answer'], axis=1, inplace=True)
 
 ## Model Training
 
+1. Using bitsandbytes library for memory management to load the pre-trained model of 7B.
+
+2. LORA config - Finetuning specific params to keep the costs low.
+
+3. Setting up the trainign arguments to save create epoch based checkpoints, learning rate, and also tell the model where to output the finetuned model.
+
+4. Setting up the trainer with the finetuned model and the data set. Here you can have training dataset, evaluation dataset, and validations dataset based on your requirements.
+   
+5. Save the model and merge the model to be used for your applicaitons or upload it to Huggingface for consumption. 
+
+
 ## Testing and Troubleshooting
