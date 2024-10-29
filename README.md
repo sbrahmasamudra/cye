@@ -2,7 +2,7 @@
 
 # [DRAFT] Llama 7B Model Fine-Tuning with Hugging Face on Foundry Cloud Platform
 
-This project demonstrates how to fine-tune the Llama 7B model using Hugging Face’s `transformers` library. The code loads a simple dataset, tokenizes it, and trains the model using the `Trainer` API with mixed precision and gradient accumulation for efficient training.
+This project demonstrates how to fine-tune the Llama 7B model using Hugging Face’s `transformers` library. The code loads a simple dataset, tokenizes it, and trains the model using the `SFTTrainer` with mixed precision and gradient accumulation for efficient training.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -36,7 +36,7 @@ This project fine-tunes the Llama 7B model (`meta-llama/Llama-2-7b-hf`) using a 
 
 2. Install the required Python packages:
     ```bash
-    pip install torch transformers datasets huggingface_hub
+      pip install transformers datasets torch accelerate huggingface_hub accelerate trl fastapi uvicorn torch transformers pandas
     ```
 
 3. Log in to Hugging Face to access the model:
@@ -45,10 +45,12 @@ This project fine-tunes the Llama 7B model (`meta-llama/Llama-2-7b-hf`) using a 
     ```
 
 ## Data Preparation
-The script uses a small, custom dataset for demonstration. The dataset contains simple source and target text pairs:
+The script uses a small, custom dataset for demonstration. The dataset contains simple question and answer text pairs:
 
-```python
-data = {
-    "source_text": ["Hi there", "How are you?", ...],
-    "target_text": ["Hello", "I am fine", ...]
-}
+```
+#1: Read the file
+df = pd.read_csv("qna_data.csv")
+df['text'] = 'Question:\n' + df['Question'] + '\n\nAnswer:\n' + df['Answer']
+df.drop(columns=['Question','Answer'], axis=1, inplace=True)
+```
+
