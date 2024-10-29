@@ -55,23 +55,19 @@ df.drop(columns=['Question','Answer'], axis=1, inplace=True)
 
 1. Using bitsandbytes library for memory management to load the pre-trained model of 7B.
 
-   ```
-    bnb_config = BitsAndBytesConfig(
+   ``` bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_use_double_quant=False,
     bnb_4bit_quant_type="nf4",
-    bnb_4bit_compute_dtype=compute_dtype
-)
+    bnb_4bit_compute_dtype=compute_dtype)
    ```
 
 2. Tokenizer to convert the loaded data. THis step will tokenize the sentences to words to ids and load the pre-trained model. 
 
-```
-tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+```tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
 tokenizer.pad_token = tokenizer.eos_token
 tokenizer.padding_side = "right"
 model = AutoModelForCausalLM.from_pretrained(model_id,quantization_config=bnb_config,device_map="auto")
-
 ```
 
 3. LORA config - Finetuning specific params to keep the costs low.
