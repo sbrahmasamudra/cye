@@ -181,9 +181,15 @@ tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
     
    ```
     curl -X POST "http://<PUBLIC_IP_ADDRESS_OF_YOUR_VM>:8080/predict" -H "Content-Type: application/json" -d '{"prompt": "What is your purpose?"}'
-     OUTPUT: {"response":"What is your purpose? Are you a business? Are you a brand? Or are you a person?"}  
+     OUTPUT: {"response":"What is your purpose? Are you a business? Are you a brand? Or are you a person?"}
    ```
+```
+From my local machine:
 
+shreyas@SSS Downloads % curl -X POST "http://54.153.91.102:8080/predict" -H "Content-Type: application/json" -d '{"prompt": "What is your purpose?"}'
+{"response":"What is your purpose? Why do you exist?\nWhat is your purpose? Why do you exist? Is there a reason for your existence?\nThese are the questions that have plagued me for a long time. I have struggled with this for years, and it has been a constant source of anxiety and uncertainty for me.\nI’ve always been fascinated by the concept of purpose. What is the purpose of life? What is the purpose of the universe"
+
+```
 8. Check logs in app.py whenever you make an HTTP request
 
 ```
