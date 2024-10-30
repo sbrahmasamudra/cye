@@ -36,7 +36,7 @@ This project fine-tunes the Llama 7B model (`meta-llama/Llama-2-7b-hf`) using a 
       pip install transformers datasets torch accelerate huggingface_hub accelerate trl fastapi uvicorn torch transformers pandas
     ```
 
-3. Log in to Hugging Face to access the model:
+3. Log in to Hugging Face to access the model. Open a terminal and enter the below command and enter your API key. This will add a session.
     ```bash
     huggingface-cli login
     ```
