@@ -155,7 +155,7 @@ tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
     This script returns the response by knowing where the fine-tuned model is, loading the model, and running the tokenizer on the 'prompt'. This is the resposne that is returned to app.py.
    ```
 
-7. Use the below commands to ensure an output like below exists that confirms the port is active and running and can accept external HTTP requests.
+6. Use the below commands to ensure an output like below exists that confirms the port is active and running and can accept external HTTP requests.
 
    ```
    ubuntu@unwilling-jaguar-1:/etc/systemd/system$ ss -tuln | grep 8080
@@ -177,7 +177,7 @@ tokenizer.save_pretrained("metallama2-7b-qa-tuned-merged")
                 [Install]  
                 WantedBy=multi-user.target
    ```
-    TESTING /predict as an external API endpoint
+ 7. Testing /predict as an external API endpoint
     
    ```
     curl -X POST "http://<PUBLIC_IP_ADDRESS_OF_YOUR_VM>:8080/predict" -H "Content-Type: application/json" -d '{"prompt": "What is your purpose?"}'
