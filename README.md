@@ -2,7 +2,7 @@
 
 # Llama 7B Model Fine-Tuning with Hugging Face on Foundry Cloud Platform
 
-This project demonstrates how to fine-tune the Llama 7B model using Hugging Face’s `transformers` library. The code loads a simple dataset, tokenizes it, and trains the model using the `SFTTrainer` on an NVIDIA GPU A40 with 2x48GB.
+This project demonstrates how to fine-tune the Llama 7B model using Hugging Face’s `transformers` library. The code loads a simple dataset, tokenizes it, and trains the model using the `SFTTrainer` (Supervices Fine Tune Trainer) on an NVIDIA GPU A40 with 2x48GB.
 
 GPU Type: NVIDIA A40
 GPUs:	2
