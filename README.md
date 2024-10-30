@@ -124,7 +124,7 @@ trainer.save_model()
 
 ```
    
-6. Save the model and merge the model to be used for your applicaitons or upload it to Huggingface for consumption.
+6. Save the model and merge the model to be used for your applicaitons or upload it to Huggingface for consumption. A successful model training should create 3 directories - (1) llama-7b-finetuned (2) llama2-7b-tuned-qna (3) metallama2-7b-qa-tuned-merged. The metallama2-7b-qa-tuned-merged is the file path you provide later on for genResponse.py to load the trained model with tokenzier to output the response. 
 
 ```
 merged_model = new_model.merge_and_unload()
