@@ -5,9 +5,9 @@
 This project demonstrates how to fine-tune the Llama 7B model using Hugging Face’s `transformers` library. The code loads a simple dataset, tokenizes it, and trains the model using the `SFTTrainer` on an NVIDIA GPU A40 with 2x48GB.
 
 GPU Type: NVIDIA A40
-# GPUs:	2
+GPUs:	2
 CPU Type: Intel(R) Xeon(R) Gold 6342 CPU @ 2.80GHz
-# CPUs:	24
+CPUs:	24
 Storage (GB): 1725
 RAM (GB): 124
 
